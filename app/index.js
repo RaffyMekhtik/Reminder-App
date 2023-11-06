@@ -1,60 +1,65 @@
-import { View, Text, Pressable, FlatList, Animated } from 'react-native'
+import { View, Text, Pressable, FlatList, SafeAreaView, StatusBar, NativeModules, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'expo-router'
 import styles from '../style'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import ReminderCard from './Components/ReminderCard'
 import { RectButton } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 export default function index() {
-  renderLeftActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
-    return (
-      <RectButton style={styles.leftAction} onPress={this.close}>
-        <Animated.Text
-          style={[
-            {
-              transform: [{ translateX: trans }],
-            },
-          ]}>
-          Delete
-        </Animated.Text>
-      </RectButton>
-    );
-  };
+  const { StatusBarManager } = NativeModules;
   const data = useSelector((state) => state.listReducer.reminders)
+  
+
+  const reminders = (
+    data.map( item => {
+      return (
+        <View style={{
+          flex:1,
+          display:'flex',
+          flexDirection:'column',
+          width:'100%',
+        }}>
+          <ReminderCard key={item.id} props={item} />
+      </View>)
+    })
+  )
+
   return (
+    <SafeAreaView style={{ 
+      flex: 1, 
+      paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
+     }}>
     <View style={styles.Main}>
+      <StatusBar backgroundColor='#000000' barStyle='light-content' />
 
-      <View style={styles.child1}></View>
+
+      <View style={styles.header}>
+        <Text style={styles.titletext}> All Reminders </Text>
+      </View>
       
-      <View style={styles.child2}>
+      <View style={styles.body}>
 
-        <Pressable style={styles.pressable}>
+        <View style={styles.modalbutton}>
+        <Pressable>
           <Link href={'/modal'}>
-            <Text style={styles.button}>+</Text>
+            <Text style={{fontSize:30, color:'white'}}>+</Text>
           </Link>
         </Pressable>
-
-        <FlatList
-          data={data}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => {
-            return(
-              <Swipeable onSwipeableWillOpen={{direction:'left'}}>
-                <ReminderCard props={item} />
-              </Swipeable>
-            )
-          } }
-        />
-
+        </View>
+        
+        <ScrollView>
+          { reminders }
+        </ScrollView>
+        
       </View>
-    
+
+     
+      
+      
+
     </View>
+    </SafeAreaView>
   )
 }
 

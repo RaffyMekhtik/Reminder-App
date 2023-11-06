@@ -1,10 +1,12 @@
-import { View, Text, Button, TextInput, Pressable } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { deleteReminder, updateReminder, createReminder } from '../../Context/Actions/listActions'
+import { deleteReminder } from '../../Context/Actions/listActions'
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { Link } from 'expo-router';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import styles from '../../style';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ReminderCard({props}) {
 
@@ -26,27 +28,60 @@ export default function ReminderCard({props}) {
         return strTime;
       }
 
-  return (
-    <View>
+      const leftSwipe = () => {
+        return (
+            <View style={styles.delete}>
+                <Ionicons name="trash" size={30} color="white" />
+            </View>
+        )
+      }
+      const rightSwipe = () => {
+        return (
+            <View style={styles.completetask}>
+                <Ionicons name="checkmark" size={30} color="white" />
+            </View>
+        )
+      }
 
-        <Pressable>
-            <Link href={{pathname:'/modal',
+  return (
+    <GestureHandlerRootView >
+    
+    <Swipeable
+        renderLeftActions={leftSwipe} 
+        renderRightActions={rightSwipe}
+        onSwipeableOpen={(direction) => {  
+            if(direction == 'left'){
+                dispatch(deleteReminder(props.id))
+            }
+        }}
+    >
+        <Pressable style={styles.reminderitem}>
+            <Link  href={{pathname:'/modal',
                 params:{
                     prevtitle:props.title,
                     prevbody:props.body,
                     prevdate:props.date,
                     previd:props.id
                 }
-            }}>
-                <Text>{props.title}</Text>
-                <Text>{props.body}</Text>
-                <Text>{formatAMPM(props.date)}</Text>
+            }}
+            >
+
+            <View style={styles.reminderformat}>
+
+                <View >
+                    <Text style={{...styles.normaltext, fontSize:25, fontWeight:'bold'}}>{props.title}</Text>
+                    <Text style={{...styles.normaltext, marginLeft:10}}>{props.body}</Text>
+                </View>
+
+                <View >
+                    <Text style={styles.normaltext}>{formatAMPM(props.date)}</Text>
+                </View>
+            </View>
+
             </Link>
         </Pressable>
 
-        
-
-        <Button title='delete' onPress={() => dispatch(deleteReminder(props.id))} />
-    </View>
+    </Swipeable>
+    </GestureHandlerRootView>
   )
 }

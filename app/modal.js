@@ -1,4 +1,4 @@
-import { View, Button, TextInput } from 'react-native'
+import { View, Button, TextInput, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { schedulePushNotification } from '../notificiation-service';
