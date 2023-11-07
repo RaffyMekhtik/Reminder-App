@@ -1,10 +1,11 @@
-import { View, Button, TextInput, StatusBar } from 'react-native'
+import { View, Button, TextInput, StatusBar, Pressable, Text } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { schedulePushNotification } from '../notificiation-service';
 import { useDispatch } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
+import styles from '../style';
 
 
 export default function modal(){
@@ -51,22 +52,30 @@ export default function modal(){
   
 
   return (
-    <View>
+    <View style={{...styles.Main, flex:1}}>
 
       <TextInput
+        placeholderTextColor={'grey'}
+        style={{...styles.input, fontWeight:'bold'}}
         placeholder='Add a Title' 
         onChangeText={setTitle}
         value={title}
       />
 
       <TextInput
+        placeholderTextColor={'grey'}
+        style={styles.input}
         placeholder='Add a Body' 
         onChangeText={setBody}
         value={body}
       />
 
-      <Button title={date.toLocaleDateString()} onPress={() => showMode("date")}/>
-      <Button title={
+      <View style={styles.datebuttonrow}>
+        <Pressable style={styles.datebutton} onPress={() => showMode("date")}>
+          <Text style={styles.datebuttontext}>{date.toLocaleDateString()}</Text>
+        </Pressable>
+        <Pressable style={styles.datebutton} onPress={() => showMode("time")}>
+          <Text style={styles.datebuttontext}>{
         date.toLocaleTimeString(
           "en-US", {
           hour: "numeric",
@@ -74,9 +83,11 @@ export default function modal(){
           hour12: true,
           }
         )
-      } 
-        onPress={() => showMode("time")}
-      />
+      } </Text>
+        </Pressable>
+      </View>
+
+      
 
       {
         show &&
@@ -88,10 +99,14 @@ export default function modal(){
         />
       }
 
-      <Button
-        title='Schedule Notification' 
+      <View style={{margin:20, marginTop:30}}>
+      <Pressable 
+        style={styles.schedulebutton}
         onPress={handleAddReminder} 
-      />
+      > 
+        <Text style={styles.datebuttontext}>Schedule Notification</Text>
+      </Pressable>
+      </View>
 
     </View>
   )
