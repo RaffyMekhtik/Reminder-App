@@ -18,7 +18,14 @@ export default function StackLayout() {
           headerRight: () => <Button title='+' onPress={ () => router.push('modal')} />
         }} />
 
-        <Stack.Screen name='modal' options={{ headerTitle: 'Modal', presentation: 'modal'}} />
+        <Stack.Screen 
+          name='modal' 
+          options={{
+             headerTitle: 'Modal', 
+             presentation: 'modal',
+             headerShown: false,
+             }} 
+          />
 
     </Stack>
     </Provider>

@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'white',
         paddingLeft:20,
+        fontWeight:'bold',
+        marginTop:30
     },  
     datebuttonrow:{
         display:'flex',
@@ -41,14 +43,30 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:25,
     },
+    reminderlist:{
+        flex:1,
+          display:'flex',
+          flexDirection:'column',
+          width:'100%',
+    },
     schedulebutton:{
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-        backgroundColor:'#5C5470',
         borderRadius:10,
         padding:10,
-        width:'100%',
+        width:'50%'
+    },
+    modalbottombuttons:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    schedulebuttontext:{
+        color:'white',
+        textAlign:'center',
+        fontSize:20,
     },
     titletext:{
         color:'white',
@@ -59,12 +77,12 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#5C5470',
         height:height/10,
         width:width/2.5,
         marginBottom:10,
         marginTop:10,
         borderRadius:10,
+        
     },
     body: {
         display:'flex',
@@ -74,8 +92,7 @@ const styles = StyleSheet.create({
     reminderitem:{
         width:'100%',
         height:'100%',
-        marginBottom:10,
-        marginTop:10,
+        
     },
     delete:{
         display:'flex',
@@ -86,8 +103,9 @@ const styles = StyleSheet.create({
         height:height/6,
         width:width,
         marginBottom:10,
-        marginTop:10,
         paddingLeft:20,
+        borderBottomWidth:3,
+        borderBottomColor:'#5C5470'
     },  
     completetask:{
         display:'flex',
@@ -98,8 +116,9 @@ const styles = StyleSheet.create({
         height:height/6,
         width:width,
         marginBottom:10,
-        marginTop:10,
         paddingRight:20,
+        borderBottomWidth:3,
+        borderBottomColor:'#5C5470'
     },  
     reminderformat:{
         display:'flex',
@@ -110,7 +129,8 @@ const styles = StyleSheet.create({
         height:height/6,
         paddingLeft:10,
         paddingRight:10,
-        backgroundColor:"#5C5470",
+        borderColor:'#5C5470',
+        borderBottomWidth:3,
     },
     normaltext:{
         fontSize:20,
@@ -129,7 +149,14 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'10%',
         paddingRight:20
-    }
+    },
+    switch:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        marginHorizontal:20,
+    },
     
   });
 

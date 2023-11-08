@@ -12,19 +12,19 @@ export default function index() {
   
 
   const reminders = (
-    data.map( item => {
+    data.map( (item, index) => {
       return (
-        <View style={{
-          flex:1,
-          display:'flex',
-          flexDirection:'column',
-          width:'100%',
-        }}>
+        <View style={
+          index == 0 ? 
+          {...styles.reminderlist,
+            borderTopWidth:3,
+            borderTopColor:'#5C5470'
+          } : styles.reminderlist }
+        >
           <ReminderCard key={item.id} props={item} />
       </View>)
     })
   )
-
   return (
     <SafeAreaView style={{ 
       flex: 1, 

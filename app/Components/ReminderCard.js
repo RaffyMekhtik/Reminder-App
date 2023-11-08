@@ -74,7 +74,7 @@ export default function ReminderCard({props}) {
                 </View>
 
                 <View >
-                    <Text style={styles.normaltext}>{formatAMPM(props.date)}</Text>
+                    <Text style={styles.normaltext}>{props.date == null ? <></> : formatAMPM(props.date)}</Text>
                 </View>
             </View>
 
