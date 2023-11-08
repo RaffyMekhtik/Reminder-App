@@ -20,6 +20,7 @@ export default function index() {
             borderTopWidth:3,
             borderTopColor:'#5C5470'
           } : styles.reminderlist }
+          key={index}
         >
           <ReminderCard key={item.id} props={item} />
       </View>)

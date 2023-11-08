@@ -16,16 +16,12 @@ export default function modal(){
   const { prevtitle,prevbody,prevdate,previd } = useLocalSearchParams()
 
   const [date, setDate] = useState(prevdate == undefined ? DateTime.now() : DateTime.fromISO(prevdate))
+  const [datetime, setDatetime] = useState( new Date())
   const [id, setId] = useState(previd == undefined ? Math.random()+10+Math.random() : previd)
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('date')
   const [isEnabled, setIsEnabled] = useState(prevdate == undefined ? false : true);
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    
-  }, [isEnabled])
-  
 
   const {
     control,
@@ -40,7 +36,10 @@ export default function modal(){
   })
 
   const onChange = (e, selectedDate) => {
-    setDate(selectedDate)
+    // const temp = DateTime.fromISO(selectedDate)
+    // setDate(temp)
+    setDatetime(selectedDate)
+    setDate(DateTime.fromJSDate(selectedDate))
     setShow(false)
   }
 
@@ -154,12 +153,12 @@ export default function modal(){
         <View style={styles.datebuttonrow}>
         <Pressable style={styles.datebutton} onPress={() => showMode("date")}>
           <Text style={styles.datebuttontext}>
-            {date.toLocaleString({month: 'short', day: 'numeric', year:'numeric'})}
+            {date.toLocaleString(DateTime.DATE_MED)}
           </Text>
         </Pressable>
         <Pressable style={styles.datebutton} onPress={() => showMode("time")}>
           <Text style={styles.datebuttontext}>
-          {date.toLocaleString({hour:'2-digit', minute:'numeric'})}
+          {date.toLocaleString(DateTime.TIME_SIMPLE)}
           </Text>
         </Pressable>
       </View>
@@ -168,12 +167,10 @@ export default function modal(){
       </>
       }
 
-      
-
       {
         show &&
         <DateTimePicker
-        value={date} 
+        value={datetime} 
         mode={mode} 
         onChange={onChange}
         display='spinner'

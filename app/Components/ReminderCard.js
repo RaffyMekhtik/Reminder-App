@@ -97,7 +97,7 @@ export default function ReminderCard({props}) {
 
                 <View >
                     <Text style={styles.normaltext}>
-                    {props.date == null ? <></> : date.toLocaleString({month: 'short', day: 'numeric', year:'numeric', hour:'2-digit', minute:'numeric'})}
+                    {props.date == null ? <></> : date.toLocaleString(DateTime.DATETIME_MED)}
                     </Text>
                 </View>
             </View>
