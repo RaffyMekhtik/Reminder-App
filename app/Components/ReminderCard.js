@@ -2,31 +2,32 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { deleteReminder } from '../../Context/Actions/listActions'
 import { useDispatch } from 'react-redux';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector, GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 import styles from '../../style';
 import { Ionicons } from '@expo/vector-icons';
+import { DateTime } from 'luxon';
 
 export default function ReminderCard({props}) {
 
     const dispatch = useDispatch()
 
-    function formatAMPM(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var day = date.getDate()
-        var month = date.getMonth() +1
-        var year = date.getFullYear()
-        const hi = new Date()
-        hi.getye
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        var strTime = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ' ' + ampm;
-        return strTime;
-      }
+    const date = DateTime.fromISO(props.date)
+
+    // function formatAMPM(date) {
+    //     var hours = date.getHours();
+    //     var minutes = date.getMinutes();
+    //     var day = date.getDate()
+    //     var month = date.getMonth() +1
+    //     var year = date.getFullYear()
+    //     var ampm = hours >= 12 ? 'PM' : 'AM';
+    //     hours = hours % 12;
+    //     hours = hours ? hours : 12; // the hour '0' should be '12'
+    //     minutes = minutes < 10 ? '0' + minutes : minutes;
+    //     var strTime = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ' ' + ampm;
+    //     return strTime;
+    //   }
 
       const leftSwipe = () => {
         return (
@@ -43,6 +44,19 @@ export default function ReminderCard({props}) {
         )
       }
 
+      const tap = Gesture.Tap()
+      .onStart(() => {
+        router.push({
+            pathname:'/modal',
+            params:{
+            prevtitle:props.title,
+            prevbody:props.body,
+            prevdate:props.date,
+            previd:props.id
+            }
+        })
+      })
+
   return (
     <GestureHandlerRootView >
     
@@ -55,31 +69,40 @@ export default function ReminderCard({props}) {
             }
         }}
     >
-        <Pressable style={styles.reminderitem}>
-            <Link  href={{pathname:'/modal',
-                params:{
-                    prevtitle:props.title,
-                    prevbody:props.body,
-                    prevdate:props.date,
-                    previd:props.id
-                }
-            }}
-            >
+        <GestureDetector gesture={tap} style={styles.reminderitem}>
 
             <View style={styles.reminderformat}>
 
-                <View >
-                    <Text style={{...styles.normaltext, fontSize:25, fontWeight:'bold'}}>{props.title}</Text>
-                    <Text style={{...styles.normaltext, marginLeft:10}}>{props.body}</Text>
+                <View 
+                    style={{
+                        marginTop:10,
+                        marginBottom:10,
+                    }}
+                >
+                    <TextInput
+                        editable={false}
+                        value={props.title}
+                        multiline={true}
+                        numberOfLines={2}
+                        style={{...styles.remindertext, fontWeight:'bold'}}
+                    />
+                    <TextInput
+                        editable={false}
+                        value={props.body}
+                        multiline={true}
+                        numberOfLines={2}
+                        style={styles.remindertext}
+                    />
                 </View>
 
                 <View >
-                    <Text style={styles.normaltext}>{props.date == null ? <></> : formatAMPM(props.date)}</Text>
+                    <Text style={styles.normaltext}>
+                    {props.date == null ? <></> : date.toLocaleString({month: 'short', day: 'numeric', year:'numeric', hour:'2-digit', minute:'numeric'})}
+                    </Text>
                 </View>
             </View>
 
-            </Link>
-        </Pressable>
+        </GestureDetector>
 
     </Swipeable>
     </GestureHandlerRootView>

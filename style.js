@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius:30,
     },
     input:{
-        height:height/8,
         fontSize:20,
         color:'white',
-        paddingLeft:20,
-        fontWeight:'bold',
-        marginTop:30
+        width:'50%',
+        textAlign:'justify',
+        height:height/8,
+
     },  
     datebuttonrow:{
         display:'flex',
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     datebuttontext:{
         color:'white',
         fontSize:25,
+        textAlign:'center'
     },
     reminderlist:{
         flex:1,
@@ -129,12 +130,19 @@ const styles = StyleSheet.create({
         height:height/6,
         paddingLeft:10,
         paddingRight:10,
+       
         borderColor:'#5C5470',
         borderBottomWidth:3,
     },
     normaltext:{
         fontSize:20,
         color:'white'
+    },
+    remindertext:{
+        fontSize:20,
+        color:'white',
+        fontSize:25, 
+        width:width/2
     },
     titletext:{
         fontSize:30,
@@ -157,6 +165,21 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginHorizontal:20,
     },
+    inputrow:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:'100%', 
+        paddingLeft:20,
+        marginBottom:20,
+    },
+    error:{
+        display:'flex',
+        alignItems:'center',
+        flexDirection:'row',
+        width:'50%',
+        alignSelf:'center'
+    }
     
   });
 

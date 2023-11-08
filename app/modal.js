@@ -8,22 +8,36 @@ import { router, useLocalSearchParams } from 'expo-router';
 import styles from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect } from 'react';
-
+import { useForm, Controller } from "react-hook-form"
+import { DateTime } from 'luxon';
 
 export default function modal(){
 
   const { prevtitle,prevbody,prevdate,previd } = useLocalSearchParams()
 
-  const [date, setDate] = useState(prevdate == undefined ? new Date() : new Date(prevdate))
+  const [date, setDate] = useState(prevdate == undefined ? DateTime.now() : DateTime.fromISO(prevdate))
   const [id, setId] = useState(previd == undefined ? Math.random()+10+Math.random() : previd)
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('date')
-  const [body, setBody] = useState(prevbody == undefined ? '' : prevbody)
-  const [title, setTitle] = useState(prevtitle == undefined ? '' : prevtitle)
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {setIsEnabled(previousState => !previousState); setError(previousState => !previousState)};
-  const [error, setError] = useState(false)
+  const [isEnabled, setIsEnabled] = useState(prevdate == undefined ? false : true);
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    
+  }, [isEnabled])
+  
+
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: (prevtitle == undefined ? '' : prevtitle),
+      body: (prevbody == undefined ? '' : prevbody),
+    },
+  })
 
   const onChange = (e, selectedDate) => {
     setDate(selectedDate)
@@ -36,37 +50,32 @@ export default function modal(){
 
   }
 
-  useEffect(() => {
-    if(title == '' && body == ''){
-      setError(true)
-    } else {
-      setError(false)
-    }
-  }, [title, body])
-  
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState)
+    clearErrors()
+  };
 
-  const handleAddReminder = () => {
 
-    if(isEnabled || title != '' || body != ''){
+  const handleAddReminder = (data) => {
+
+    if(isEnabled || data.title != '' || data.body != ''){
 
       const isReminderOn = isEnabled ? date : null
       const reminder = {
         id: id,
-        title: title,
-        body: body,
+        title: data.title,
+        body: data.body,
         date: isReminderOn,
       }
 
       if(previd == undefined){
         dispatch(createReminder(reminder))
       } else {
-        dispatch(updateReminder({id: id, body: body, date:date, title:title}))
+        dispatch(updateReminder({id: id, body: data.body, date:isReminderOn, title:data.title}))
       }
 
       router.back()
 
-    } else {
-      setError(true)
     }
   }
   
@@ -74,22 +83,57 @@ export default function modal(){
   return (
     <View style={{...styles.Main, flex:1}}>
 
-      <TextInput
-        placeholderTextColor={error ? 'red' : 'grey'}
-        style={styles.input}
-        placeholder='Add a Title' 
-        onChangeText={setTitle}
-        value={title}
+    <View style={{...styles.inputrow, marginTop:50}}>
+      <Controller
+        control={control}
+        rules={isEnabled ? {required: false} : {required: true}}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+          multiline={true}
+          numberOfLines={2}
+          placeholderTextColor='grey'
+          style={{...styles.input, fontWeight:'bold',fontSize:25,}}
+          placeholder='Add a Title' 
+          onChangeText={onChange}
+          value={value}
+        />
+        )}
+        name="title"
       />
-      {error ? <Ionicons name="alert-circle-outline" size={24} color="red" /> : null}
-      <TextInput
-        placeholderTextColor={error ? 'red' : 'grey'}
-        style={styles.input}
-        placeholder='Add a Body' 
-        onChangeText={setBody}
-        value={body}
+      {
+        errors.title && 
+        <View style={styles.error}>
+          <Ionicons name="alert-circle-outline" size={24} color="red" />
+          <Text style={{color:'red'}}>Title is required</Text>
+        </View>
+      }
+    </View>
+
+    <View style={styles.inputrow}>
+      <Controller
+        control={control}
+        rules={isEnabled ? {required: false} : {required: true}}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+          multiline={true}
+          numberOfLines={2}
+          placeholderTextColor='grey'
+          style={styles.input}
+          placeholder='Add a Body' 
+          onChangeText={onChange}
+          value={value}
+        />
+        )}
+        name="body"
       />
-      {error ? <Ionicons name="alert-circle-outline" size={24} color="red" /> : null}
+        {
+        errors.body && 
+        <View style={styles.error}>
+          <Ionicons name="alert-circle-outline" size={24} color="red" />
+          <Text style={{color:'red'}}>Body is required</Text>
+        </View>
+      }
+    </View>
 
       <View style={styles.switch}>
         <Text style={styles.normaltext}>Add Reminder?</Text>
@@ -109,18 +153,13 @@ export default function modal(){
         isEnabled ?
         <View style={styles.datebuttonrow}>
         <Pressable style={styles.datebutton} onPress={() => showMode("date")}>
-          <Text style={styles.datebuttontext}>{date.toLocaleDateString()}</Text>
+          <Text style={styles.datebuttontext}>
+            {date.toLocaleString({month: 'short', day: 'numeric', year:'numeric'})}
+          </Text>
         </Pressable>
         <Pressable style={styles.datebutton} onPress={() => showMode("time")}>
-          <Text style={styles.datebuttontext}>{
-            date.toLocaleTimeString(
-              "en-US", {
-              hour: "numeric",
-              minute: "numeric",
-              hour12: true,
-              }
-            )
-          } 
+          <Text style={styles.datebuttontext}>
+          {date.toLocaleString({hour:'2-digit', minute:'numeric'})}
           </Text>
         </Pressable>
       </View>
@@ -145,15 +184,15 @@ export default function modal(){
         <View style={styles.modalbottombuttons}>
         
         <Pressable 
-            style={styles.schedulebutton}
+            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:'#5C5470'} : {...styles.schedulebutton}}
             onPress={() => {router.back()}} 
           > 
             <Text style={styles.schedulebuttontext}>Cancel</Text>
           </Pressable>
 
           <Pressable 
-            style={styles.schedulebutton}
-            onPress={handleAddReminder} 
+            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:'#5C5470'} : {...styles.schedulebutton}}
+            onPress={handleSubmit(handleAddReminder)} 
           > 
             <Text style={styles.schedulebuttontext}>Done</Text>
           </Pressable>
