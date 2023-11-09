@@ -1,4 +1,4 @@
-import { View, Button, TextInput, StatusBar, Pressable, Text, Switch } from 'react-native'
+import { View, TextInput, Pressable, Text, Switch } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { schedulePushNotification } from '../notificiation-service';
@@ -182,7 +182,7 @@ export default function modal(){
         
         <Pressable 
             style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:'#5C5470'} : {...styles.schedulebutton}}
-            onPress={() => {router.back()}} 
+            onPress={() => {}} 
           > 
             <Text style={styles.schedulebuttontext}>Cancel</Text>
           </Pressable>

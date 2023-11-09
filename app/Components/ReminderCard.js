@@ -47,7 +47,7 @@ export default function ReminderCard({props}) {
       const tap = Gesture.Tap()
       .onStart(() => {
         router.push({
-            pathname:'/modal',
+            pathname:'/addReminder',
             params:{
             prevtitle:props.title,
             prevbody:props.body,

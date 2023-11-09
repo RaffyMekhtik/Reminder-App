@@ -71,6 +71,13 @@ const listReducer = ( state = initialState, action) => {
             }
         }
 
+        case types.CLEAR_ALL_REMINDERS:{
+
+            return {
+                reminders: []
+            }
+        }
+
         default:
             return state;
     }

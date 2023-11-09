@@ -74,17 +74,6 @@ const styles = StyleSheet.create({
         fontSize:30,
         paddingLeft:20,
     },
-    modalbutton:{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        height:height/10,
-        width:width/2.5,
-        marginBottom:10,
-        marginTop:10,
-        borderRadius:10,
-        
-    },
     body: {
         display:'flex',
         width:'100%',
@@ -152,11 +141,13 @@ const styles = StyleSheet.create({
     },
     modalbutton:{
         display:'flex',
-        justifyContent:'center',
-        alignItems:'flex-end',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
         width:'100%',
         height:'10%',
-        paddingRight:20
+        paddingRight:20,
+        paddingLeft:20
     },
     switch:{
         display:'flex',
@@ -179,6 +170,21 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         width:'50%',
         alignSelf:'center'
+    },
+    clearAllModal:{
+        backgroundColor:'white',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        width:width/2,
+        height:height/4,
+        borderRadius:25
+    },
+    clearAllModalOuter:{
+        justifyContent:'center',
+        alignItems:'center',
+        flex:1,
+        backgroundColor:'#00000080'
     }
     
   });

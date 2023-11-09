@@ -20,10 +20,9 @@ export default function StackLayout() {
         }} />
 
         <Stack.Screen 
-          name='modal' 
+          name='addReminder' 
           options={{
              headerTitle: 'Modal', 
-             presentation: 'modal',
              headerShown: false,
              }} 
           />
