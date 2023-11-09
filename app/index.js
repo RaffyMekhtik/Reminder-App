@@ -1,7 +1,7 @@
 import { View, Text, Pressable, FlatList, SafeAreaView, StatusBar, NativeModules, ScrollView, Modal } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Link, router } from 'expo-router'
-import styles from '../style'
+import {secondaryColor, styles} from '../style'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import ReminderCard from './Components/ReminderCard'
 import { RectButton } from 'react-native-gesture-handler';
@@ -21,9 +21,10 @@ export default function index() {
       return (
         <View style={
           index == 0 ? 
-          {...styles.reminderlist,
+          {
+            ...styles.reminderlist, 
             borderTopWidth:3,
-            borderTopColor:'#5C5470'
+            borderTopColor:secondaryColor
           } : styles.reminderlist }
           key={index}
         >

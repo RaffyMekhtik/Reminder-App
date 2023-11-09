@@ -5,7 +5,7 @@ import { schedulePushNotification } from '../notificiation-service';
 import { useDispatch } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
-import styles from '../style';
+import { styles, accentColor, secondaryColor } from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
@@ -137,8 +137,8 @@ export default function modal(){
       <View style={styles.switch}>
         <Text style={styles.normaltext}>Add Reminder?</Text>
         <Switch
-        trackColor={{false: 'red', true: 'green'}}
-        thumbColor='#f4f3f4'
+        trackColor={{false: 'grey', true: '#EEEEEE'}}
+        thumbColor={accentColor}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
@@ -181,14 +181,14 @@ export default function modal(){
         <View style={styles.modalbottombuttons}>
         
         <Pressable 
-            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:'#5C5470'} : {...styles.schedulebutton}}
-            onPress={() => {}} 
+            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:secondaryColor} : {...styles.schedulebutton}}
+            onPress={() => {router.back()}} 
           > 
             <Text style={styles.schedulebuttontext}>Cancel</Text>
           </Pressable>
 
           <Pressable 
-            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:'#5C5470'} : {...styles.schedulebutton}}
+            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:secondaryColor} : {...styles.schedulebutton}}
             onPress={handleSubmit(handleAddReminder)} 
           > 
             <Text style={styles.schedulebuttontext}>Done</Text>

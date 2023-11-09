@@ -2,10 +2,13 @@
 import { Dimensions, StatusBar, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
+var backgroundColor = '#222831';
+var secondaryColor = '#393E46';
+var accentColor = '#FD7014'
 const styles = StyleSheet.create({
     Main: {
         display: 'flex',
-        backgroundColor:'#352F44'
+        backgroundColor:backgroundColor
     },
     header: {
         width:'100%',
@@ -13,14 +16,14 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent:'flex-end',
         alignItems:'center',
-        backgroundColor:'#5C5470',
+        backgroundColor:secondaryColor,
         borderBottomRightRadius:30,
         borderBottomLeftRadius:30,
     },
     input:{
         fontSize:20,
         color:'white',
-        width:'50%',
+        width:'70%',
         textAlign:'justify',
         height:height/8,
 
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-        backgroundColor:'#5C5470',
+        backgroundColor:secondaryColor,
         borderRadius:10,
         width:width/2.5,
     },
@@ -46,9 +49,9 @@ const styles = StyleSheet.create({
     },
     reminderlist:{
         flex:1,
-          display:'flex',
-          flexDirection:'column',
-          width:'100%',
+        display:'flex',
+        flexDirection:'column',
+        width:'100%',
     },
     schedulebutton:{
         display:'flex',
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
         marginBottom:10,
         paddingLeft:20,
         borderBottomWidth:3,
-        borderBottomColor:'#5C5470'
+        borderBottomColor:secondaryColor
     },  
     completetask:{
         display:'flex',
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
         marginBottom:10,
         paddingRight:20,
         borderBottomWidth:3,
-        borderBottomColor:'#5C5470'
+        borderBottomColor:secondaryColor
     },  
     reminderformat:{
         display:'flex',
@@ -117,21 +120,24 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         width:width,
         height:height/6,
-        paddingLeft:10,
-        paddingRight:10,
-       
-        borderColor:'#5C5470',
+        padding:10,
+        paddingTop:10,
+        paddingBottom:10,
+        borderColor:secondaryColor,
         borderBottomWidth:3,
     },
     normaltext:{
         fontSize:20,
-        color:'white'
+        color:'white',
+        textAlign:'center',
+    },
+    remindersection:{
+        width:'50%',
     },
     remindertext:{
         fontSize:20,
         color:'white',
         fontSize:25, 
-        width:width/2
     },
     titletext:{
         fontSize:30,
@@ -185,8 +191,12 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flex:1,
         backgroundColor:'#00000080'
-    }
+    },
+    lineThrough:{
+        textDecorationStyle:'solid',
+        textDecorationLine:'line-through'
+    },
     
   });
 
-  export default styles
+  export {styles, backgroundColor, secondaryColor, accentColor}
