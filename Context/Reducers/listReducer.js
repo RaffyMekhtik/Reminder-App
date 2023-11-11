@@ -3,7 +3,8 @@ import { constants as types } from "../ActionTypes";
 import { schedulePushNotification } from "../../notificiation-service";
 
 const initialState = {
-    reminders : []
+    reminders : [],
+    isDarkMode: true
 }
 
 async function CancelReminders(id){
@@ -33,6 +34,7 @@ const listReducer = ( state = initialState, action) => {
                 )
 
             return {
+                ...state,
                 reminders: [...state.reminders, action.payload]
             }
         }
@@ -56,6 +58,7 @@ const listReducer = ( state = initialState, action) => {
             })
             
             return {
+                ...state,
                 reminders: [...updated]
             }
         }
@@ -67,6 +70,7 @@ const listReducer = ( state = initialState, action) => {
             const tempReminders = state.reminders
             const removed = tempReminders.filter(value => value.id !== id)
             return {
+                ...state,
                 reminders: [...removed]
             }
         }
@@ -80,6 +84,7 @@ const listReducer = ( state = initialState, action) => {
             })
 
             return {
+                ...state,
                 reminders: []
             }
         }
@@ -97,6 +102,14 @@ const listReducer = ( state = initialState, action) => {
                 action.payload.id
                 )
             return state
+
+        }
+        case types.TOGGLE_DARK:{
+            
+            return {
+                ...state,
+                isDarkMode:!state.isDarkMode
+            }
 
         }
 

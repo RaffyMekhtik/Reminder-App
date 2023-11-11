@@ -3,10 +3,20 @@ import { Dimensions, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
+//Dark Theme
 var backgroundColor = '#222831'
 var secondaryColor = '#393E46'
-var accentColor = '#FD7014'
 var textColor = 'white'
+var cardColor = '#101114'
+
+//Light Theme
+var backgroundColorLight = '#EDD382'
+var secondaryColorLight = '#F26202'
+var textColorLight = 'black'
+var cardColorLight = '#CA5202'
+
+var accentColor = '#FD7014'
+
 const styles = StyleSheet.create({
     Main: {
         display: 'flex',
@@ -127,7 +137,7 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         borderColor:secondaryColor,
         borderBottomWidth:3,
-        backgroundColor:backgroundColor,
+        backgroundColor:cardColor,
     },
     normaltext:{
         fontSize:20,
@@ -181,7 +191,7 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     clearAllModal:{
-        backgroundColor:textColor,
+        backgroundColor:backgroundColor,
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
@@ -208,4 +218,8 @@ export {
     secondaryColor, 
     accentColor, 
     textColor, 
+    backgroundColorLight,
+    secondaryColorLight,
+    textColorLight,
+    cardColorLight
 }

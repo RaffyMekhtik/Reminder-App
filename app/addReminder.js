@@ -2,10 +2,10 @@ import { View, TextInput, Pressable, Text, Switch } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { schedulePushNotification } from '../notificiation-service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
-import { styles, accentColor, secondaryColor } from '../style';
+import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight } from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
@@ -21,6 +21,8 @@ export default function modal(){
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('date')
   const [isEnabled, setIsEnabled] = useState(prevdate == undefined ? false : true);
+  const isDarkMode = useSelector((state) => state.listReducer.isDarkMode)
+
   const dispatch = useDispatch()
 
   const {
@@ -80,7 +82,7 @@ export default function modal(){
   
 
   return (
-    <View style={{...styles.Main, flex:1}}>
+    <View style={isDarkMode ? {...styles.Main, flex:1} : {...styles.Main, flex:1, backgroundColor:backgroundColorLight}}>
 
     <View style={{...styles.inputrow, marginTop:50}}>
       <Controller
@@ -91,7 +93,7 @@ export default function modal(){
           multiline={true}
           numberOfLines={2}
           placeholderTextColor='grey'
-          style={{...styles.input, fontWeight:'bold',fontSize:25,}}
+          style={isDarkMode ? {...styles.input, fontWeight:'bold',fontSize:25,} : {...styles.input, fontWeight:'bold',fontSize:25, color:textColorLight}}
           placeholder='Add a Title' 
           onChangeText={onChange}
           value={value}
@@ -117,7 +119,7 @@ export default function modal(){
           multiline={true}
           numberOfLines={2}
           placeholderTextColor='grey'
-          style={styles.input}
+          style={isDarkMode ? styles.input : {...styles.input, color:textColorLight}}
           placeholder='Add a Body' 
           onChangeText={onChange}
           value={value}
@@ -135,10 +137,20 @@ export default function modal(){
     </View>
 
       <View style={styles.switch}>
-        <Text style={styles.normaltext}>Add Reminder?</Text>
+        <Text style={isDarkMode ? styles.normaltext : {...styles.normaltext, color: textColorLight}}>Add Reminder?</Text>
         <Switch
-        trackColor={{false: '#EEEEEE', true: '#EEEEEE'}}
-        thumbColor={isEnabled ? accentColor : 'grey'}
+        trackColor={
+          isDarkMode?
+          {false: '#EEEEEE', true: '#EEEEEE'}
+          :
+          {false: secondaryColorLight, true: '#EEEEEE'}
+          }
+        thumbColor={
+          isDarkMode?
+          isEnabled ? accentColor : 'grey'
+          :
+          isEnabled ? accentColor : 'black'
+          }
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
@@ -151,13 +163,13 @@ export default function modal(){
       {
         isEnabled ?
         <View style={styles.datebuttonrow}>
-        <Pressable style={styles.datebutton} onPress={() => showMode("date")}>
-          <Text style={styles.datebuttontext}>
+        <Pressable style={isDarkMode ? styles.datebutton : {...styles.datebutton, backgroundColor:secondaryColorLight}} onPress={() => showMode("date")}>
+          <Text style={isDarkMode ? styles.datebuttontext : {...styles.datebuttontext, color:textColorLight}}>
             {date.toLocaleString(DateTime.DATE_MED)}
           </Text>
         </Pressable>
-        <Pressable style={styles.datebutton} onPress={() => showMode("time")}>
-          <Text style={styles.datebuttontext}>
+        <Pressable style={isDarkMode ? styles.datebutton : {...styles.datebutton, backgroundColor:secondaryColorLight}} onPress={() => showMode("time")}>
+          <Text style={isDarkMode ? styles.datebuttontext : {...styles.datebuttontext, color:textColorLight}}>
           {date.toLocaleString(DateTime.TIME_SIMPLE)}
           </Text>
         </Pressable>
@@ -181,17 +193,41 @@ export default function modal(){
         <View style={styles.modalbottombuttons}>
         
         <Pressable 
-            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:secondaryColor} : {...styles.schedulebutton}}
+            style={
+              ({pressed}) =>
+               isDarkMode ?
+              pressed ? 
+              {...styles.schedulebutton, backgroundColor:secondaryColor}
+               : 
+              {...styles.schedulebutton}
+              :
+              pressed ? 
+              {...styles.schedulebutton, backgroundColor:secondaryColorLight}
+               : 
+              {...styles.schedulebutton}
+            }
             onPress={() => {router.back()}} 
           > 
-            <Text style={styles.schedulebuttontext}>Cancel</Text>
+            <Text style={isDarkMode ? styles.schedulebuttontext : {...styles.schedulebuttontext, color: textColorLight}}>Cancel</Text>
           </Pressable>
 
           <Pressable 
-            style={({pressed}) => pressed ? {...styles.schedulebutton, backgroundColor:secondaryColor} : {...styles.schedulebutton}}
+            style={
+              ({pressed}) =>
+               isDarkMode ?
+              pressed ? 
+              {...styles.schedulebutton, backgroundColor:secondaryColor}
+               : 
+              {...styles.schedulebutton}
+              :
+              pressed ? 
+              {...styles.schedulebutton, backgroundColor:secondaryColorLight}
+               : 
+              {...styles.schedulebutton}
+            }
             onPress={handleSubmit(handleAddReminder)} 
           > 
-            <Text style={styles.schedulebuttontext}>Done</Text>
+            <Text style={isDarkMode ? styles.schedulebuttontext : {...styles.schedulebuttontext, color: textColorLight}}>Done</Text>
           </Pressable>
 
         </View>

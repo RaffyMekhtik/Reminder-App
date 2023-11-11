@@ -27,6 +27,12 @@ const clearAllReminders = () => {
     }
     return action
 }
+const toggleDark = () => {
+    const action = {
+        type: types.TOGGLE_DARK,
+    }
+    return action
+}
 const cancelScheduledReminder = ( payload ) => {
     const action = {
         type: types.CANCEL_SCHEDULED_REMINDER,
@@ -48,5 +54,6 @@ module.exports = {
     updateReminder,
     clearAllReminders,
     cancelScheduledReminder,
-    scheduleReminder
+    scheduleReminder,
+    toggleDark
 }

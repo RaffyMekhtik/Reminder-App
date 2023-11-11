@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../../Context/Actions/listActions'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Gesture, GestureDetector, GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
-import {styles} from '../../style';
+import {backgroundColor, backgroundColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../../style';
 import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
@@ -16,6 +16,7 @@ export default function ReminderCard({props}) {
     const [isPast, setIsPast] = useState(false)
 
     const dispatch = useDispatch()
+    const isDarkMode = useSelector((state) => state.listReducer.isDarkMode)
 
     const reminderDate = DateTime.fromISO(props.date)
     const currentDate = DateTime.now()
@@ -92,7 +93,20 @@ export default function ReminderCard({props}) {
     >
         <GestureDetector gesture={tap} style={styles.reminderitem}>
 
-            <View style={ isPast ? {...styles.reminderformat, backgroundColor:'#101114'} : styles.reminderformat}>
+            <View style={ 
+                isPast ? 
+                    isDarkMode?
+                 styles.reminderformat
+                : 
+                {...styles.reminderformat, backgroundColor:cardColorLight}
+
+                    :
+                    isDarkMode?
+                {...styles.reminderformat, backgroundColor:backgroundColor} 
+                : 
+                {...styles.reminderformat, backgroundColor:secondaryColorLight}
+            }
+            >
 
                 <View 
                 style={styles.remindersection}
@@ -100,13 +114,27 @@ export default function ReminderCard({props}) {
                     <Text
                         style={
                             isPast ?
+                            isDarkMode?
                             [{
                                 ...styles.remindertext, 
                                 fontWeight:'bold'
                             }, styles.lineThrough]
                             :
+                            [{
+                                ...styles.remindertext, 
+                                color:textColorLight,
+                                fontWeight:'bold'
+                            }, styles.lineThrough]
+                            :
+                            isDarkMode?
                             { 
                                 ...styles.remindertext, 
+                                fontWeight:'bold'
+                            }
+                            :
+                            { 
+                                ...styles.remindertext, 
+                                color:textColorLight,
                                 fontWeight:'bold'
                             }
                         }
@@ -116,14 +144,30 @@ export default function ReminderCard({props}) {
                     <Text
                         style={
                             isPast ?
+                            isDarkMode?
                             [{
                                 ...styles.remindertext, 
                                 textAlign:'center',
                                 height:'70%'
                             }, styles.lineThrough]
                             :
+                            [{
+                                ...styles.remindertext, 
+                                color:textColorLight,
+                                textAlign:'center',
+                                height:'70%'
+                            }, styles.lineThrough]
+                            :
+                            isDarkMode?
                             { 
                                 ...styles.remindertext, 
+                                textAlign:'center',
+                                height:'70%'
+                            }
+                            :
+                            { 
+                                ...styles.remindertext,
+                                color:textColorLight,
                                 textAlign:'center',
                                 height:'70%'
                             }
@@ -136,10 +180,32 @@ export default function ReminderCard({props}) {
                 <View 
                     style={styles.remindersection}
                 >
-                    <Text style={isPast ? [styles.normaltext,styles.lineThrough] : {...styles.normaltext}}>
+                    <Text style={
+                        isPast ? 
+                        isDarkMode?
+                        [styles.normaltext,styles.lineThrough] 
+                        :
+                        [{...styles.normaltext, color:textColorLight},styles.lineThrough] 
+                        :
+                        isDarkMode?
+                        {...styles.normaltext}
+                        :
+                        {...styles.normaltext,color:textColorLight}
+                    }>
                     {props.date == null ? <></> : reminderDate.toLocaleString(DateTime.DATE_MED)}
                     </Text>
-                    <Text style={isPast ? [styles.normaltext,styles.lineThrough] : {...styles.normaltext}}>
+                    <Text style={
+                        isPast ? 
+                        isDarkMode?
+                        [styles.normaltext,styles.lineThrough] 
+                        :
+                        [{...styles.normaltext, color:textColorLight},styles.lineThrough] 
+                        :
+                        isDarkMode?
+                        {...styles.normaltext}
+                        :
+                        {...styles.normaltext,color:textColorLight}
+                    }>
                     {props.date == null ? <></> : reminderDate.toLocaleString(DateTime.TIME_SIMPLE)}
                     </Text>
                 </View>
