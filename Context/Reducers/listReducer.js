@@ -73,9 +73,31 @@ const listReducer = ( state = initialState, action) => {
 
         case types.CLEAR_ALL_REMINDERS:{
 
+            const tempReminders = state.reminders
+
+            const deleteReminders = tempReminders.map(item => {
+                CancelReminders(item.id)
+            })
+
             return {
                 reminders: []
             }
+        }
+        
+        case types.CANCEL_SCHEDULED_REMINDER:{
+
+            CancelReminders(action.payload)
+            return state
+        }
+        case types.SCHEDULE_REMINDER:{
+            CreateReminders(
+                action.payload.title,
+                action.payload.body,
+                action.payload.date,
+                action.payload.id
+                )
+            return state
+
         }
 
         default:

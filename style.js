@@ -1,10 +1,12 @@
 
-import { Dimensions, StatusBar, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
-var backgroundColor = '#222831';
-var secondaryColor = '#393E46';
+
+var backgroundColor = '#222831'
+var secondaryColor = '#393E46'
 var accentColor = '#FD7014'
+var textColor = 'white'
 const styles = StyleSheet.create({
     Main: {
         display: 'flex',
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
     },
     input:{
         fontSize:20,
-        color:'white',
+        color:textColor,
         width:'70%',
         textAlign:'justify',
         height:height/8,
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
         width:width/2.5,
     },
     datebuttontext:{
-        color:'white',
+        color:textColor,
         fontSize:25,
         textAlign:'center'
     },
@@ -68,12 +70,12 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     schedulebuttontext:{
-        color:'white',
+        color:textColor,
         textAlign:'center',
         fontSize:20,
     },
     titletext:{
-        color:'white',
+        color:textColor,
         fontSize:30,
         paddingLeft:20,
     },
@@ -125,10 +127,11 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         borderColor:secondaryColor,
         borderBottomWidth:3,
+        backgroundColor:backgroundColor,
     },
     normaltext:{
         fontSize:20,
-        color:'white',
+        color:textColor,
         textAlign:'center',
     },
     remindersection:{
@@ -136,12 +139,12 @@ const styles = StyleSheet.create({
     },
     remindertext:{
         fontSize:20,
-        color:'white',
+        color:textColor,
         fontSize:25, 
     },
     titletext:{
         fontSize:30,
-        color:'white',
+        color:textColor,
         fontWeight:'bold',
         margin:60
     },
@@ -178,7 +181,7 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     clearAllModal:{
-        backgroundColor:'white',
+        backgroundColor:textColor,
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
@@ -199,4 +202,10 @@ const styles = StyleSheet.create({
     
   });
 
-  export {styles, backgroundColor, secondaryColor, accentColor}
+export {
+    styles, 
+    backgroundColor, 
+    secondaryColor, 
+    accentColor, 
+    textColor, 
+}

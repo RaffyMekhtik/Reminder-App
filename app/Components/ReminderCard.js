@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
-import { deleteReminder } from '../../Context/Actions/listActions'
+import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../../Context/Actions/listActions'
 import { useDispatch } from 'react-redux';
 import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
@@ -59,21 +59,40 @@ export default function ReminderCard({props}) {
         })
       })
 
+      var swipeable
+
   return (
     <GestureHandlerRootView >
     
     <Swipeable
+        ref={ref => swipeable = ref}
         renderLeftActions={leftSwipe} 
         renderRightActions={rightSwipe}
         onSwipeableOpen={(direction) => {  
             if(direction == 'left'){
                 dispatch(deleteReminder(props.id))
             }
+            else{
+                swipeable.close()
+                if(isPast){
+                    const reminder = {
+                        id: props.id,
+                        title: props.title,
+                        body:props.body,
+                        date: props.date,
+                    }
+                    dispatch(scheduleReminder(reminder))
+                }else{
+                    dispatch(cancelScheduledReminder(props.id))
+                }
+                
+                setIsPast(prev => !prev)
+            }
         }}
     >
         <GestureDetector gesture={tap} style={styles.reminderitem}>
 
-            <View style={ isPast ? {...styles.reminderformat, backgroundColor:'#00000080'} : styles.reminderformat}>
+            <View style={ isPast ? {...styles.reminderformat, backgroundColor:'#101114'} : styles.reminderformat}>
 
                 <View 
                 style={styles.remindersection}

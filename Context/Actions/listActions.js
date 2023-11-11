@@ -27,10 +27,26 @@ const clearAllReminders = () => {
     }
     return action
 }
+const cancelScheduledReminder = ( payload ) => {
+    const action = {
+        type: types.CANCEL_SCHEDULED_REMINDER,
+        payload
+    }
+    return action
+}
+const scheduleReminder = ( payload ) => {
+    const action = {
+        type: types.SCHEDULE_REMINDER,
+        payload
+    }
+    return action
+}
 
 module.exports = {
     createReminder,
     deleteReminder,
     updateReminder,
-    clearAllReminders
+    clearAllReminders,
+    cancelScheduledReminder,
+    scheduleReminder
 }

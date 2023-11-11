@@ -137,8 +137,8 @@ export default function modal(){
       <View style={styles.switch}>
         <Text style={styles.normaltext}>Add Reminder?</Text>
         <Switch
-        trackColor={{false: 'grey', true: '#EEEEEE'}}
-        thumbColor={accentColor}
+        trackColor={{false: '#EEEEEE', true: '#EEEEEE'}}
+        thumbColor={isEnabled ? accentColor : 'grey'}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
