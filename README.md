@@ -12,6 +12,9 @@
 ```
 npm i 
 ```
+```
+npm run android 
+```
 ## How To Use:
 
 To add a reminder or note, press on the + Icon, You can either add

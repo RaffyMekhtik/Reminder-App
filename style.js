@@ -1,7 +1,7 @@
 
 import { Dimensions, StyleSheet } from "react-native";
-var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
+var width = Dimensions.get('screen').width; //full width
+var height = Dimensions.get('screen').height; //full height
 
 //Dark Theme
 var backgroundColor = '#222831'
@@ -85,11 +85,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
     },
-    titletext:{
-        color:textColor,
-        fontSize:30,
-        paddingLeft:20,
-    },
+
     body: {
         display:'flex',
         width:'100%',
@@ -157,7 +153,7 @@ const styles = StyleSheet.create({
         fontSize:30,
         color:textColor,
         fontWeight:'bold',
-        margin:60
+        padding:50,
     },
     modalbutton:{
         display:'flex',
@@ -181,8 +177,9 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         width:'100%', 
-        paddingHorizontal:20,
         marginBottom:20,
+        paddingLeft:20,
+        paddingRight:40
     },
     error:{
         display:'flex',
@@ -224,5 +221,6 @@ export {
     textColorLight,
     cardColorLight,
     borderColor,
-    borderColorLight
+    borderColorLight,
+    height
 }

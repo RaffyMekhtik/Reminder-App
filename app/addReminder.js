@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
-import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight, cardColorLight } from '../style';
+import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight, cardColorLight, height } from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { useForm, Controller } from "react-hook-form"
 import { DateTime } from 'luxon';
@@ -78,7 +78,7 @@ export default function modal(){
   
 
   return (
-    <View style={isDarkMode ? {...styles.Main, flex:1} : {...styles.Main, flex:1, backgroundColor:backgroundColorLight}}>
+    <View style={isDarkMode ? {...styles.Main, height:height} : {...styles.Main, height:height, backgroundColor:backgroundColorLight}}>
 
     <View style={{...styles.inputrow, marginTop:50}}>
       <Controller
@@ -185,7 +185,7 @@ export default function modal(){
         />
       }
 
-      <View style={{margin:20,bottom:10,position:'absolute'}}>
+      <View style={{margin:20,bottom:60,position:'absolute'}}>
         <View style={styles.modalbottombuttons}>
         
         <Pressable 
