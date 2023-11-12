@@ -12,6 +12,7 @@
 ```
 npm i 
 ```
+Install Expo Go on your phone, unless you're running an emulator, then it will be installed automatically
 ```
 npm run android 
 ```
