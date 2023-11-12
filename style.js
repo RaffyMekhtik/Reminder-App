@@ -9,12 +9,14 @@ var secondaryColor = '#393E46'
 var textColor = 'white'
 var cardColor = '#101114'
 var accentColor = '#FD7014'
+var borderColor = secondaryColor
 
 //Light Theme
-var backgroundColorLight = '#EDD382'
-var secondaryColorLight = '#F26202'
+var backgroundColorLight = '#cfe1b9'
+var secondaryColorLight = '#97a97c'
 var textColorLight = 'black'
-var cardColorLight = '#CA5202'
+var cardColorLight = '#718355'
+var borderColorLight = 'black'
 
 const styles = StyleSheet.create({
     Main: {
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
         padding:10,
         paddingTop:10,
         paddingBottom:10,
-        borderColor:secondaryColor,
+        borderColor:borderColor,
         borderBottomWidth:3,
         backgroundColor:cardColor,
     },
@@ -220,5 +222,7 @@ export {
     backgroundColorLight,
     secondaryColorLight,
     textColorLight,
-    cardColorLight
+    cardColorLight,
+    borderColor,
+    borderColorLight
 }

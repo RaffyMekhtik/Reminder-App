@@ -5,7 +5,7 @@ import { schedulePushNotification } from '../notificiation-service';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
-import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight } from '../style';
+import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight, cardColorLight } from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
@@ -149,7 +149,7 @@ export default function modal(){
           isDarkMode?
           isEnabled ? accentColor : 'grey'
           :
-          isEnabled ? accentColor : 'black'
+          cardColorLight
           }
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
