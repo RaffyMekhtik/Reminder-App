@@ -102,12 +102,12 @@ export default function index() {
         {
           isDarkMode?
 
-          <Pressable onPress={() => {dispatch(toggleDark())}}>
+          <Pressable style={({pressed}) => pressed ? {backgroundColor:'grey', borderRadius:25, padding:5} : {padding:5}} onPress={() => {dispatch(toggleDark())}}>
             <Ionicons name='sunny' size={30} color="yellow"/>
           </Pressable>
           :
-          <Pressable onPress={() => {dispatch(toggleDark())}}>
-            <Ionicons name='moon' size={30} color="black"/>
+          <Pressable style={({pressed}) => pressed ? {backgroundColor:'lightgrey', borderRadius:25, padding:5} : {padding:5}} onPress={() => {dispatch(toggleDark())}}>
+            <Ionicons name='moon' size={25} color="black"/>
           </Pressable>
         }
         <Text style={isDarkMode ? styles.titletext : {...styles.titletext, color:textColorLight}}> All Reminders </Text>
