@@ -12,7 +12,6 @@ export default function index() {
   const dispatch = useDispatch()
   const { StatusBarManager } = NativeModules;
   const [show, setShow] = useState(false)
-  const [isDark, setIsDark] = useState(true)
   const data = useSelector((state) => state.listReducer.reminders)
   const isDarkMode = useSelector((state) => state.listReducer.isDarkMode)
   
@@ -22,12 +21,22 @@ export default function index() {
     data.map( (item, index) => {
       return (
         <View style={
-          index == 0 ? 
+          index == 0 ?
+          isDarkMode? 
           {
             ...styles.reminderlist, 
             borderTopWidth:3,
             borderTopColor:secondaryColor
-          } : styles.reminderlist }
+          }
+          : 
+          {
+            ...styles.reminderlist, 
+            borderTopWidth:3,
+            borderTopColor:'black'
+          } 
+          : 
+          styles.reminderlist 
+        }
           key={index}
         >
           <ReminderCard key={item.id} props={item} />

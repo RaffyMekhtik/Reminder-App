@@ -8,14 +8,13 @@ var backgroundColor = '#222831'
 var secondaryColor = '#393E46'
 var textColor = 'white'
 var cardColor = '#101114'
+var accentColor = '#FD7014'
 
 //Light Theme
 var backgroundColorLight = '#EDD382'
 var secondaryColorLight = '#F26202'
 var textColorLight = 'black'
 var cardColorLight = '#CA5202'
-
-var accentColor = '#FD7014'
 
 const styles = StyleSheet.create({
     Main: {

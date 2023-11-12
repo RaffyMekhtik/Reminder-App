@@ -98,13 +98,13 @@ export default function ReminderCard({props}) {
                     isDarkMode?
                  styles.reminderformat
                 : 
-                {...styles.reminderformat, backgroundColor:cardColorLight}
+                {...styles.reminderformat, backgroundColor:cardColorLight, borderColor:'black'}
 
                     :
                     isDarkMode?
                 {...styles.reminderformat, backgroundColor:backgroundColor} 
                 : 
-                {...styles.reminderformat, backgroundColor:secondaryColorLight}
+                {...styles.reminderformat, backgroundColor:secondaryColorLight, borderColor:'black'}
             }
             >
 
