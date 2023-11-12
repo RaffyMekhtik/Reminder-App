@@ -1,13 +1,11 @@
 import { View, TextInput, Pressable, Text, Switch } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { schedulePushNotification } from '../notificiation-service';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReminder, updateReminder } from '../Context/Actions/listActions'
 import { router, useLocalSearchParams } from 'expo-router';
 import { styles, accentColor, secondaryColor, backgroundColorLight, textColorLight, secondaryColorLight, cardColorLight } from '../style';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
 import { DateTime } from 'luxon';
 
@@ -38,8 +36,6 @@ export default function modal(){
   })
 
   const onChange = (e, selectedDate) => {
-    // const temp = DateTime.fromISO(selectedDate)
-    // setDate(temp)
     setDatetime(selectedDate)
     setDate(DateTime.fromJSDate(selectedDate))
     setShow(false)

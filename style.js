@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         color:textColor,
         width:'70%',
         textAlign:'justify',
-        height:height/8,
+        height:height/6,
 
     },  
     datebuttonrow:{
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         width:'100%', 
-        paddingLeft:20,
+        paddingHorizontal:20,
         marginBottom:20,
     },
     error:{
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flexDirection:'row',
         width:'50%',
-        alignSelf:'center'
+        alignSelf:'center',
     },
     clearAllModal:{
         backgroundColor:backgroundColor,
