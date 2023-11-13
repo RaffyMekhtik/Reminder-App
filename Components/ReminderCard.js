@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
-import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../../Context/Actions/listActions'
+import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../Context/Actions/listActions'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Gesture, GestureDetector, GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
-import {backgroundColor, backgroundColorLight, borderColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../../style';
+import {backgroundColor, backgroundColorLight, borderColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 import { useState } from 'react';

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     body: {
         display:'flex',
         width:'100%',
-        height:'75%',
     },
     reminderitem:{
         width:'100%',
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         width:'100%',
-        height:'10%',
+        height:height/12,
         paddingRight:20,
         paddingLeft:20
     },

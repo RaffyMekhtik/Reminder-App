@@ -14,9 +14,7 @@ export default function StackLayout() {
 
         <Stack.Screen name='index' options={{
           headerShown:false,
-          headerTitle: 'All Reminders',
-          headerTitleAlign: 'center',
-          headerRight: () => <Button title='+' onPress={ () => router.push('modal')} />
+          headerTitle: 'All Reminders'
         }} />
 
         <Stack.Screen 

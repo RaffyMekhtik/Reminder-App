@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, router } from 'expo-router'
 import {accentColor, backgroundColor, backgroundColorLight, secondaryColor, secondaryColorLight, styles, textColor, textColorLight} from '../style'
 import { connect, useDispatch, useSelector } from 'react-redux';
-import ReminderCard from './Components/ReminderCard'
-import { RectButton } from 'react-native-gesture-handler';
+import ReminderCard from '../Components/ReminderCard'
 import { Ionicons } from '@expo/vector-icons';
 import { clearAllReminders,toggleDark } from '../Context/Actions/listActions'
 
@@ -49,7 +48,7 @@ export default function index() {
 
   const onScroll = (event) => {
     var currentOffset = event.nativeEvent.contentOffset.y;
-        var direction = currentOffset > this.offset ? 'down' : 'up';
+    var direction = currentOffset > this.offset ? 'down' : 'up';
     this.offset = currentOffset;
     if(direction == 'down'){
       setShowTopButton(true)
@@ -154,7 +153,6 @@ export default function index() {
           { reminders }
 
       </View>
-        
      </ScrollView>
 
       {
