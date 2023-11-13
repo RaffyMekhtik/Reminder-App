@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
         backgroundColor:backgroundColor
     },
     header: {
-        width:'100%',
-        height:'25%',
+        width:width,
+        height:height/4.5,
         display:'flex',
         justifyContent:'flex-end',
         alignItems:'center',
@@ -207,6 +207,18 @@ const styles = StyleSheet.create({
         textDecorationStyle:'solid',
         textDecorationLine:'line-through'
     },
+    scrollToTopButton:{
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:accentColor, 
+        position:'absolute', 
+        bottom:60,
+        right:20,
+        borderRadius:25,
+        padding:5,
+        paddingHorizontal:7
+    }
     
   });
 

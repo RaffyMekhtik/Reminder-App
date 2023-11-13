@@ -1,7 +1,7 @@
-import { View, Text, Pressable, FlatList, SafeAreaView, StatusBar, NativeModules, ScrollView, Modal } from 'react-native'
+import { View, Text, Pressable, FlatList, SafeAreaView, StatusBar, NativeModules, ScrollView, Modal, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Link, router } from 'expo-router'
-import {backgroundColor, backgroundColorLight, secondaryColor, secondaryColorLight, styles, textColor, textColorLight} from '../style'
+import {accentColor, backgroundColor, backgroundColorLight, secondaryColor, secondaryColorLight, styles, textColor, textColorLight} from '../style'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import ReminderCard from './Components/ReminderCard'
 import { RectButton } from 'react-native-gesture-handler';
@@ -12,6 +12,7 @@ export default function index() {
   const dispatch = useDispatch()
   const { StatusBarManager } = NativeModules;
   const [show, setShow] = useState(false)
+  const [showTopButton, setShowTopButton] = useState(false)
   const data = useSelector((state) => state.listReducer.reminders)
   const isDarkMode = useSelector((state) => state.listReducer.isDarkMode)
   
@@ -43,6 +44,20 @@ export default function index() {
       </View>)
     })
   )
+
+  var scrollObject;
+
+  const onScroll = (event) => {
+    var currentOffset = event.nativeEvent.contentOffset.y;
+        var direction = currentOffset > this.offset ? 'down' : 'up';
+    this.offset = currentOffset;
+    if(direction == 'down'){
+      setShowTopButton(true)
+    }else{
+      setShowTopButton(false)
+    }
+  }
+
   return (
     <SafeAreaView style={{ 
       flex: 1, 
@@ -95,9 +110,15 @@ export default function index() {
     </Modal>
 
     <View style={isDarkMode ? styles.Main : {...styles.Main, backgroundColor:backgroundColorLight}}>
+    
+
       <StatusBar backgroundColor='#000000' barStyle='light-content' />
 
-
+      <ScrollView
+        
+        ref={ref => scrollObject = ref}
+        onScroll={(nativeEvent) => onScroll(nativeEvent)}
+      >
       <View style={isDarkMode ? styles.header : {...styles.header, backgroundColor:secondaryColorLight}}>
         {
           isDarkMode?
@@ -114,7 +135,7 @@ export default function index() {
       </View>
       
       <View style={styles.body}>
-
+      
         <View style={styles.modalbutton}>
 
           <Pressable onPress={toggleShowModal}>
@@ -129,17 +150,23 @@ export default function index() {
           </Pressable>
 
         </View>
-        
-        <ScrollView>
+          
           { reminders }
-        </ScrollView>
-        
+
       </View>
+        
+     </ScrollView>
 
-     
+      {
+        showTopButton &&
+        <Pressable 
+        style={isDarkMode ? styles.scrollToTopButton : {...styles.scrollToTopButton, backgroundColor:accentColor}} 
+        onPress={() => scrollObject.scrollTo({x: 0, animated: true})}
+        >
+          <Ionicons name='arrow-up' size={30} color={isDarkMode ? textColor : textColorLight}/>
+        </Pressable>
+      }
       
-      
-
     </View>
     </SafeAreaView>
   )
