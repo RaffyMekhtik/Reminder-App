@@ -9,7 +9,7 @@ var secondaryColor = '#393E46'
 var textColor = 'white'
 var cardColor = '#101114'
 var accentColor = '#FD7014'
-var borderColor = secondaryColor
+var borderColor = 'white'
 
 //Light Theme
 var backgroundColorLight = '#cfe1b9'
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
         width:width,
         marginBottom:10,
         paddingLeft:20,
-        borderBottomWidth:3,
-        borderBottomColor:secondaryColor
+        borderBottomWidth:2,
+        borderBottomColor:borderColor
     },  
     completetask:{
         display:'flex',
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
         width:width,
         marginBottom:10,
         paddingRight:20,
-        borderBottomWidth:3,
-        borderBottomColor:secondaryColor
+        borderBottomWidth:2,
+        borderBottomColor:borderColor
     },  
     reminderformat:{
         display:'flex',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         paddingTop:10,
         paddingBottom:10,
         borderColor:borderColor,
-        borderBottomWidth:3,
+        borderBottomWidth:2,
         backgroundColor:cardColor,
     },
     normaltext:{

@@ -4,7 +4,7 @@ import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../Co
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import {backgroundColor, backgroundColorLight, borderColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../style';
+import {backgroundColor, borderColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
@@ -98,7 +98,7 @@ export default function ReminderCard({props}) {
 
                     :
                     isDarkMode?
-                {...styles.reminderformat, backgroundColor:backgroundColor} 
+                {...styles.reminderformat, backgroundColor:secondaryColor} 
                 : 
                 {...styles.reminderformat, backgroundColor:secondaryColorLight, borderColor:borderColorLight}
             }

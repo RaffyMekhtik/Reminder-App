@@ -1,7 +1,7 @@
 import { View, Text, Pressable, FlatList, SafeAreaView, StatusBar, NativeModules, ScrollView, Modal, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Link, router } from 'expo-router'
-import {accentColor, backgroundColor, backgroundColorLight, secondaryColor, secondaryColorLight, styles, textColor, textColorLight} from '../style'
+import {accentColor, backgroundColor, backgroundColorLight, borderColor, borderColorLight, secondaryColor, secondaryColorLight, styles, textColor, textColorLight} from '../style'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import ReminderCard from '../Components/ReminderCard'
 import { Ionicons } from '@expo/vector-icons';
@@ -25,14 +25,14 @@ export default function index() {
           isDarkMode? 
           {
             ...styles.reminderlist, 
-            borderTopWidth:3,
-            borderTopColor:secondaryColor
+            borderTopWidth:2,
+            borderTopColor:borderColor
           }
           : 
           {
             ...styles.reminderlist, 
-            borderTopWidth:3,
-            borderTopColor:'black'
+            borderTopWidth:2,
+            borderTopColor:borderColorLight
           } 
           : 
           styles.reminderlist 
