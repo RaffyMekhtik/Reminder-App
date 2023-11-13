@@ -4,7 +4,6 @@ import { deleteReminder, cancelScheduledReminder, scheduleReminder } from '../Co
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { Gesture, GestureDetector, GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 import {backgroundColor, backgroundColorLight, borderColorLight, cardColorLight, secondaryColor, secondaryColorLight, styles, textColorLight} from '../style';
 import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
@@ -47,23 +46,9 @@ export default function ReminderCard({props}) {
         )
       }
 
-      const tap = Gesture.Tap()
-      .onStart(() => {
-        router.push({
-            pathname:'/addReminder',
-            params:{
-            prevtitle:props.title,
-            prevbody:props.body,
-            prevdate:props.date,
-            previd:props.id
-            }
-        })
-      })
-
       var swipeable
 
   return (
-    <GestureHandlerRootView >
     
     <Swipeable
         ref={ref => swipeable = ref}
@@ -91,7 +76,18 @@ export default function ReminderCard({props}) {
             }
         }}
     >
-        <GestureDetector gesture={tap} style={styles.reminderitem}>
+        <Pressable 
+            onPress={() => router.push({
+                pathname:'/addReminder',
+                params:{
+                prevtitle:props.title,
+                prevbody:props.body,
+                prevdate:props.date,
+                previd:props.id
+                }
+            })} 
+            style={styles.reminderitem}
+        >
 
             <View style={ 
                 isPast ? 
@@ -211,9 +207,8 @@ export default function ReminderCard({props}) {
                 </View>
             </View>
 
-        </GestureDetector>
+        </Pressable>
 
     </Swipeable>
-    </GestureHandlerRootView>
   )
 }

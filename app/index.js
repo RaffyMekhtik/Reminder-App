@@ -60,6 +60,7 @@ export default function index() {
   return (
     <SafeAreaView style={{ 
       flex: 1, 
+      backgroundColor: isDarkMode? backgroundColor : backgroundColorLight,
       paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
      }}>
       
@@ -67,10 +68,15 @@ export default function index() {
     <View style={styles.clearAllModalOuter}>
       <View style={isDarkMode ? styles.clearAllModal : {...styles.clearAllModal, backgroundColor:backgroundColorLight}}>
         <Text
-          style={{
-            textAlign:'center',
-            fontSize:20,
-          }}
+          style={
+            isDarkMode? 
+            styles.normaltext 
+            : 
+            {
+              ...styles.normaltext, 
+              color:textColorLight
+            }
+          }
         >
         Are you sure you want to clear all reminders?
         </Text>
@@ -82,25 +88,62 @@ export default function index() {
           width:'100%',
           marginTop:20
         }}>
-          <Pressable onPress={toggleShowModal}>
-          <Text
-          style={{
-            textAlign:'center',
-            fontSize:20,
-          }}
+          <Pressable style={
+            ({pressed}) =>
+            pressed?
+              isDarkMode? 
+              {...styles.normaltext, backgroundColor:secondaryColor} 
+              : 
+              {
+                ...styles.normaltext, 
+                color:textColorLight,
+                backgroundColor:secondaryColorLight
+              }
+            :
+            null
+          } onPress={toggleShowModal}>
+          <Text style={
+            isDarkMode? 
+              {...styles.normaltext} 
+              : 
+              {
+                ...styles.normaltext, 
+                color:textColorLight
+              }
+          }
+          
         >Cancel</Text>
           </Pressable>
           <Pressable 
+          style={
+            ({pressed}) =>
+            pressed?
+              isDarkMode? 
+              {...styles.normaltext, backgroundColor:secondaryColor} 
+              : 
+              {
+                ...styles.normaltext, 
+                color:textColorLight,
+                backgroundColor:secondaryColorLight
+              }
+            :
+            null
+          }
             onPress={() => 
             {
               toggleShowModal()
               dispatch(clearAllReminders())
             }}>
           <Text
-          style={{
-            textAlign:'center',
-            fontSize:20,
-          }}
+          style={
+            isDarkMode? 
+              {...styles.normaltext} 
+              : 
+              {
+                ...styles.normaltext, 
+                color:textColorLight
+              }
+          }
         >Confirm</Text>
           </Pressable>
         </View>
@@ -114,7 +157,6 @@ export default function index() {
       <StatusBar backgroundColor='#000000' barStyle='light-content' />
 
       <ScrollView
-        
         ref={ref => scrollObject = ref}
         onScroll={(nativeEvent) => onScroll(nativeEvent)}
       >
